@@ -1,0 +1,1 @@
+npm @nestjs/typeorm typeorm pg
