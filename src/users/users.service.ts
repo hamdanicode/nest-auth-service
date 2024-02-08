@@ -18,6 +18,16 @@ export class UsersService {
         return this.userRepository.find();
     }
 
+    async validateUser(email:string, password:string):Promise<User|null>{
+
+        const userData= await this.userRepository.findOne({where:{
+            email:email
+        }})
+
+        if(userData && (await userData.validatePassword(password)))return userData;
+        return null
+    }
+
     async insert(userDto:CreateUserDto):Promise<void>{
         const {name,password,email,username,role}=userDto;
         
