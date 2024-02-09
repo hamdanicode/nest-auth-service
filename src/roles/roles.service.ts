@@ -12,6 +12,12 @@ import { ConfigService } from '@nestjs/config';
 export class RolesService {
     constructor(@InjectRepository(Role) private readonly roleRopository:Repository<Role>,private configService:ConfigService){}
 
+    async getAll():Promise<Role[]>{
+
+        return await this.roleRopository.find()
+
+    }
+
     async create(createRoleDto:CreateRoleDto):Promise<void>{
         const {name}=createRoleDto;
         
