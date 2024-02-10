@@ -3,19 +3,19 @@ import { CreateRoleDto } from './dto/createRoleDto';
 import { RolesService } from './roles.service';
 import { log } from 'console';
 import { UpdateRoleAccessDto } from './dto/updateRoleAccessDto';
-import { AuthGuard } from '@nestjs/passport';
 import { GetUser } from 'src/auth/get-user.decorator';
 import { User } from 'src/users/entity/user.entity';
+import { JwtGuard } from 'src/auth/guard/jwt.guard';
 
 @Controller('roles')
-@UseGuards(AuthGuard('jwt'))
+@UseGuards(JwtGuard)
 export class RolesController {
 
     constructor(private roleService:RolesService){}
 
     @Get()
     async getAll(@GetUser() user:User){
-        console.log(user);
+        // console.log(user);
         return this.roleService.getAll();
     }
 
